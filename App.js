@@ -1,55 +1,45 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Image} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {createStackNavigator} from 'react-navigation-stack';
 
 import {
   DiscoverScreen,
   GenresScreen,
   MineScreen,
   ProfileScreen,
+  PopularScreen,
+  RegionsScreen,
 } from './src/screens';
 
-class IconWithBadge extends React.Component {
-  render() {
-    const {name, badgeCount, color, size} = this.props;
-    return (
-      <View style={{width: 24, height: 24, margin: 5}}>
-        <Ionicons name={name} size={size} color={color} />
-        {badgeCount > 0 && (
-          <View
-            style={{
-              // /If you're using react-native < 0.57 overflow outside of the parent
-              // will not work on Android, see https://git.io/fhLJ8
-              position: 'absolute',
-              right: -6,
-              top: -3,
-              backgroundColor: 'red',
-              borderRadius: 6,
-              width: 12,
-              height: 12,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={{color: 'white', fontSize: 10, fontWeight: 'bold'}}>
-              {badgeCount}
-            </Text>
-          </View>
-        )}
-      </View>
-    );
-  }
-}
-
-const HomeIconWithBadge = props => {
-  // You should pass down the badgeCount in some other ways like context, redux, mobx or event emitters.
-  return <IconWithBadge {...props} badgeCount={3} />;
-};
+const DiscoverStack = createStackNavigator({
+  Discover: {
+    screen: DiscoverScreen,
+    navigationOptions: ({navigation}) => ({
+      headerShown: false,
+      headerBackTitle: null,
+    }),
+  },
+  popular: {
+    screen: PopularScreen,
+    navigationOptions: ({navigation}) => ({
+      title: 'Popular',
+      headerBackTitle: null,
+    }),
+  },
+  regions: {
+    screen: RegionsScreen,
+    navigationOptions: ({navigation}) => ({
+      title: 'Regions',
+    }),
+  },
+});
 
 const TabNavigator = createBottomTabNavigator(
   {
-    Discover: DiscoverScreen,
+    Discover: DiscoverStack,
     Genres: GenresScreen,
     Mine: MineScreen,
     Profile: ProfileScreen,
@@ -58,22 +48,34 @@ const TabNavigator = createBottomTabNavigator(
     defaultNavigationOptions: ({navigation}) => ({
       tabBarIcon: ({focused, horizontal, tintColor}) => {
         const {routeName} = navigation.state;
-        let IconComponent = Ionicons;
-        let iconName;
+        let selectedIcon;
+        let defaultIcon;
         if (routeName === 'Discover') {
-          // IconComponent = MaterialIcons;
           iconName = 'ios-globe';
+          selectedIcon = require('./src/assets/ic_discover_selected.png');
+          defaultIcon = require('./src/assets/ic_discover_default.png');
         }
         if (routeName === 'Genres') {
           iconName = `ios-radio`;
+          selectedIcon = require('./src/assets/ic_genres_selected.png');
+          defaultIcon = require('./src/assets/ic_genres_default.png');
         }
         if (routeName === 'Mine') {
           iconName = `ios-bookmark`;
+          selectedIcon = require('./src/assets/ic_favourite_selected.png');
+          defaultIcon = require('./src/assets/ic_favourite_default.png');
         }
         if (routeName === 'Profile') {
           iconName = `ios-person`;
+          selectedIcon = require('./src/assets/ic_profile_selected.png');
+          defaultIcon = require('./src/assets/ic_profile_default.png');
         }
-        return <IconComponent name={iconName} size={25} color={tintColor} />;
+        return (
+          <Image
+            style={{width: 25, height: 25}}
+            source={focused ? selectedIcon : defaultIcon}
+          />
+        );
       },
     }),
     tabBarOptions: {
@@ -84,34 +86,3 @@ const TabNavigator = createBottomTabNavigator(
 );
 
 export default createAppContainer(TabNavigator);
-
-// export default createBottomTabNavigator(
-//   {
-//     Home: HomeScreen,
-//     Settings: SettingsScreen,
-//   },
-//   {
-//     defaultNavigationOptions: ({ navigation }) => ({
-//       tabBarIcon: ({ focused, horizontal, tintColor }) => {
-//         const { routeName } = navigation.state;
-//         let IconComponent = Ionicons;
-//         let iconName;
-//         if (routeName === 'Home') {
-//           iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-//           // Sometimes we want to add badges to some icons.
-//           // You can check the implementation below.
-//           IconComponent = HomeIconWithBadge;
-//         } else if (routeName === 'Settings') {
-//           iconName = `ios-options`;
-//         }
-
-//         // You can return any component that you like here!
-//         return <IconComponent name={iconName} size={25} color={tintColor} />;
-//       },
-//     }),
-//     tabBarOptions: {
-//       activeTintColor: 'tomato',
-//       inactiveTintColor: 'gray',
-//     },
-//   }
-// );
