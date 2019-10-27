@@ -1,6 +1,6 @@
 export const ENTRIES1 = [
   {
-    title: "Beautiful and dramatic Antelope Canyon",
+    title: "Richard Gadd’s “Baby Reindeer” at The Bush Theatre: An Obsessive Story About Obsession",
     subtitle: "Lorem ipsum dolor sit amet et nuncat mergitur",
     illustration: "https://thetheatretimes.com/wp-content/uploads/2019/10/Photography_Teresa-Castracane-e1571945334869-1024x683.jpg"
   },

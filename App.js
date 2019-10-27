@@ -12,6 +12,7 @@ import {
   ProfileScreen,
   PopularScreen,
   RegionsScreen,
+  ArticleScreen,
 } from './src/screens';
 
 // const DiscoverStack = createStackNavigator({
@@ -119,6 +120,13 @@ const AppStack = createStackNavigator({
       headerBackTitle: null,
     }),
   },
+  article: {
+    screen: ArticleScreen,
+    navigationOptions: ({navigation}) => ({
+      title: `${navigation.getParam('title') || null}`,
+      headerBackTitle: null,
+    }),
+  }
 });
 
 AppStack.navigationOptions = ({ navigation }) => {

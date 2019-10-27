@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
+import React from 'react';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import Articles from './Articles';
 
 const arrow = require('../assets/ic_arrow_grey_small.png');
@@ -8,7 +8,7 @@ const Section = props => {
     <View style={{paddingHorizontal: 16}}>
       <View
         style={{
-          // flex: 1,
+          flex: 1,
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -33,7 +33,9 @@ const Section = props => {
           />
         </TouchableOpacity>
       </View>
-      <Articles data={props.data} horizontal={props.horizontal} />
+      <Articles
+        {...props}
+      />
     </View>
   );
 };

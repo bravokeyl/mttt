@@ -15,6 +15,7 @@ import SliderEntry from '../components/SliderEntry';
 import styles, {colors} from '../styles/index.style';
 import {sliderWidth, itemWidth} from '../styles/SliderEntry.style';
 import {ENTRIES1, ENTRIES2} from '../static/entries';
+import articlesData from '../static/articles';
 import Section from '../components/Section';
 
 const chatIcon = require('../assets/chat-bubble-50.png');
@@ -114,7 +115,7 @@ class DiscoverScreen extends React.Component {
             </View>
           </View>
           <Section
-            data={ENTRIES2}
+            data={articlesData}
             navigation={this.props.navigation}
             headingText="Latest"
             navigationKey="latest"
@@ -122,14 +123,14 @@ class DiscoverScreen extends React.Component {
             horizontal
           />
           <Section
-            data={ENTRIES1}
+            data={articlesData}
             navigation={this.props.navigation}
             headingText="Spotlight"
             navigationKey="spotlight"
             mkey="spotlight"
           />
           <Section
-            data={ENTRIES2}
+            data={articlesData}
             navigation={this.props.navigation}
             headingText="Editor's Picks"
             navigationKey="editor-picks"

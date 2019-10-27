@@ -4,6 +4,7 @@ import MineScreen from './MineScreen';
 import ProfileScreen from './ProfileScreen';
 import PopularScreen from './PopularScreen';
 import RegionsScreen from './RegionsScreen';
+import ArticleScreen from './ArticleScreen';
 
 export {
   DiscoverScreen,
@@ -12,4 +13,5 @@ export {
   ProfileScreen,
   PopularScreen,
   RegionsScreen,
+  ArticleScreen,
 };
