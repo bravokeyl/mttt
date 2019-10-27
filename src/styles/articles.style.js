@@ -1,0 +1,29 @@
+import { StyleSheet, Dimensions, Platform } from 'react-native';
+
+const IS_IOS = Platform.OS === 'ios';
+const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
+
+export default StyleSheet.create({
+  blogItemWidth: (viewportWidth / 2) - 16,
+  blogItem: {
+    width: (viewportWidth / 2) - 16,
+    marginBottom: 8,
+  },
+  blogImage: {
+    width: (viewportWidth / 2) - 22,
+    marginRight: 6,
+    height: 200,
+    resizeMode: 'cover',
+    borderRadius: 8,
+  },
+  blogTitle: {
+    fontSize: 14,
+    fontWeight: "500",
+    marginVertical: 6,
+  },
+  blogPublishedDate: {
+    fontSize: 11,
+    color: '#333',
+    marginBottom: 6,
+  }
+});

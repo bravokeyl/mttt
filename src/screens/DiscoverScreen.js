@@ -1,5 +1,14 @@
 import React from 'react';
-import {SafeAreaView, Platform, Text, View, Image, Button, TouchableOpacity} from 'react-native';
+import {
+  SafeAreaView,
+  Platform,
+  Text,
+  View,
+  Image,
+  Button,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 
 import SliderEntry from '../components/SliderEntry';
@@ -28,12 +37,11 @@ class DiscoverScreen extends React.Component {
     return <SliderEntry data={item} even={(index + 1) % 2 === 0} />;
   }
 
-  navigateToScreen = (screen) => {
+  navigateToScreen = screen => {
     this.props.navigation.navigation(screen);
-  }
+  };
 
   render() {
-    
     const actionItems = [
       {
         key: 'popular',
@@ -58,51 +66,76 @@ class DiscoverScreen extends React.Component {
     ];
     return (
       <SafeAreaView style={{flex: 1}}>
-        <View>
-          <Carousel
-            ref={c => (this._slider1Ref = c)}
-            data={ENTRIES1}
-            renderItem={this._renderItem}
-            sliderWidth={sliderWidth}
-            itemWidth={sliderWidth}
-            firstItem={SLIDER_1_FIRST_ITEM}
-            containerCustomStyle={styles.slider}
-            contentContainerCustomStyle={styles.sliderContentContainer}
-            loop={true}
-            loopClonesPerSide={2}
-            autoplay={true}
-            autoplayDelay={500}
-            autoplayInterval={3000}
-            onSnapToItem={index => this.setState({slider1ActiveSlide: index})}
-          />
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              paddingHorizontal: 16,
-              height: 90,
-            }}>
-            {actionItems.map(e => {
-              return (
-                <TouchableOpacity key={e.key} onPress={() => this.props.navigation.navigate(e.key)}>
-                  <View style={{alignItems: 'center'}}>
-                    <Image style={{width: 35, height: 35}} source={e.icon} />
-                    <Text
-                      style={{
-                        marginTop: 6,
-                        textTransform: 'uppercase',
-                        fontSize: 11,
-                      }}>
-                      {e.name}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              );
-            })}
+        <ScrollView>
+          <View>
+            <Carousel
+              ref={c => (this._slider1Ref = c)}
+              data={ENTRIES1}
+              renderItem={this._renderItem}
+              sliderWidth={sliderWidth}
+              itemWidth={sliderWidth}
+              firstItem={SLIDER_1_FIRST_ITEM}
+              containerCustomStyle={styles.slider}
+              contentContainerCustomStyle={styles.sliderContentContainer}
+              loop={true}
+              loopClonesPerSide={2}
+              autoplay={true}
+              autoplayDelay={500}
+              autoplayInterval={3000}
+              onSnapToItem={index => this.setState({slider1ActiveSlide: index})}
+            />
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+                paddingHorizontal: 16,
+                height: 90,
+              }}>
+              {actionItems.map(e => {
+                return (
+                  <TouchableOpacity
+                    key={e.key}
+                    onPress={() => this.props.navigation.navigate(e.key)}>
+                    <View style={{alignItems: 'center'}}>
+                      <Image style={{width: 35, height: 35}} source={e.icon} />
+                      <Text
+                        style={{
+                          marginTop: 6,
+                          textTransform: 'uppercase',
+                          fontSize: 11,
+                        }}>
+                        {e.name}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
           </View>
-        </View>
-        <Section navigation={this.props.navigation} />
+          <Section
+            data={ENTRIES2}
+            navigation={this.props.navigation}
+            headingText="Latest"
+            navigationKey="latest"
+            mkey="latest"
+            horizontal
+          />
+          <Section
+            data={ENTRIES1}
+            navigation={this.props.navigation}
+            headingText="Spotlight"
+            navigationKey="spotlight"
+            mkey="spotlight"
+          />
+          <Section
+            data={ENTRIES2}
+            navigation={this.props.navigation}
+            headingText="Editor's Picks"
+            navigationKey="editor-picks"
+            mkey="editor-picks"
+          />
+        </ScrollView>
       </SafeAreaView>
     );
   }
