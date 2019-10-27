@@ -9,12 +9,18 @@ export default StyleSheet.create({
     width: (viewportWidth / 2) - 16,
     marginBottom: 8,
   },
+  blogHItem: {
+    width: (viewportWidth / 2) - 32,
+  },
   blogImage: {
     width: (viewportWidth / 2) - 22,
     marginRight: 6,
     height: 200,
     resizeMode: 'cover',
     borderRadius: 8,
+  },
+  blogHImage: {
+    width: (viewportWidth / 2) - 38,
   },
   blogTitle: {
     fontSize: 14,

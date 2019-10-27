@@ -10,12 +10,22 @@ import {
 import styles from '../styles/articles.style';
 
 const Articles = props => {
-  renderArticle = b => {
+  renderArticle = (b, horizontal) => {
+    const blogItemStyles = [
+      styles.blogItem,
+    ];
+    const blogImageStyles = [
+      styles.blogImage,
+    ];
+    if(horizontal) {
+      blogItemStyles.push(styles.blogHItem);
+      blogImageStyles.push(styles.blogHImage);
+    }
     return (
-      <TouchableOpacity>
-        <View style={styles.blogItem}>
+      <TouchableOpacity key={b.title}>
+        <View style={blogItemStyles}>
           <Image
-            style={styles.blogImage}
+            style={blogImageStyles}
             source={{uri: b.illustration}}
           />
           <Text style={styles.blogTitle}>{b.title}</Text>
@@ -40,7 +50,7 @@ const Articles = props => {
         <FlatList
           horizontal
           data={props.data}
-          renderItem={({item}) => renderArticle(item)}
+          renderItem={({item}) => renderArticle(item, styles.blogHItem)}
           keyExtractor={item => item.title}
         />
       )}
