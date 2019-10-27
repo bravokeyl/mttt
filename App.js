@@ -14,32 +14,43 @@ import {
   RegionsScreen,
 } from './src/screens';
 
-const DiscoverStack = createStackNavigator({
-  Discover: {
-    screen: DiscoverScreen,
-    navigationOptions: ({navigation}) => ({
-      headerShown: false,
-      headerBackTitle: null,
-    }),
-  },
-  popular: {
-    screen: PopularScreen,
-    navigationOptions: ({navigation}) => ({
-      title: 'Popular',
-      headerBackTitle: null,
-    }),
-  },
-  regions: {
-    screen: RegionsScreen,
-    navigationOptions: ({navigation}) => ({
-      title: 'Regions',
-    }),
-  },
-});
+// const DiscoverStack = createStackNavigator({
+//   Discover: {
+//     screen: DiscoverScreen,
+//     navigationOptions: ({navigation}) => ({
+//       headerShown: false,
+//       headerBackTitle: null,
+//     }),
+//   },
+//   // popular: {
+//   //   screen: PopularScreen,
+//   //   navigationOptions: ({navigation}) => ({
+//   //     title: 'Popular',
+//   //     headerBackTitle: null,
+//   //   }),
+//   // },
+//   // regions: {
+//   //   screen: RegionsScreen,
+//   //   navigationOptions: ({navigation}) => ({
+//   //     title: 'Regions',
+//   //   }),
+//   // },
+// });
+
+// DiscoverStack.navigationOptions = ({ navigation }) => {
+//   let tabBarVisible = true;
+//   if (navigation.state.index > 0) {
+//     tabBarVisible = false;
+//   }
+
+//   return {
+//     tabBarVisible,
+//   };
+// };
 
 const TabNavigator = createBottomTabNavigator(
   {
-    Discover: DiscoverStack,
+    Discover: DiscoverScreen,
     Genres: GenresScreen,
     Mine: MineScreen,
     Profile: ProfileScreen,
@@ -85,4 +96,36 @@ const TabNavigator = createBottomTabNavigator(
   },
 );
 
-export default createAppContainer(TabNavigator);
+const AppStack = createStackNavigator({
+  Tabs: {
+    screen: TabNavigator,
+    navigationOptions: ({navigation}) => ({
+      headerShown: false,
+      headerBackTitle: null,
+    }),
+  },
+  popular: {
+    screen: PopularScreen,
+    navigationOptions: ({navigation}) => ({
+      title: 'Popular',
+      headerBackTitle: null,
+      // headerLeft: null,
+    }),
+  },
+  regions: {
+    screen: RegionsScreen,
+    navigationOptions: ({navigation}) => ({
+      title: 'Regions',
+      headerBackTitle: null,
+    }),
+  },
+});
+
+AppStack.navigationOptions = ({ navigation }) => {
+  return {
+    headerBackTitle: null,
+    headerLeft: null,
+  }
+};
+
+export default createAppContainer(AppStack);

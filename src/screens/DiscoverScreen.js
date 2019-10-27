@@ -6,6 +6,12 @@ import SliderEntry from '../components/SliderEntry';
 import styles, {colors} from '../styles/index.style';
 import {sliderWidth, itemWidth} from '../styles/SliderEntry.style';
 import {ENTRIES1, ENTRIES2} from '../static/entries';
+import Section from '../components/Section';
+
+const chatIcon = require('../assets/chat-bubble-50.png');
+const openBookIcon = require('../assets/ic_discount_discover.png');
+const coinIcon = require('../assets/ic_free_coin.png');
+const popularIcon = require('../assets/ic_ranking.png');
 
 const IS_ANDROID = Platform.OS === 'android';
 const SLIDER_1_FIRST_ITEM = 1;
@@ -27,10 +33,7 @@ class DiscoverScreen extends React.Component {
   }
 
   render() {
-    const chatIcon = require('../assets/chat-bubble-50.png');
-    const openBookIcon = require('../assets/ic_discount_discover.png');
-    const coinIcon = require('../assets/ic_free_coin.png');
-    const popularIcon = require('../assets/ic_ranking.png');
+    
     const actionItems = [
       {
         key: 'popular',
@@ -99,6 +102,7 @@ class DiscoverScreen extends React.Component {
             })}
           </View>
         </View>
+        <Section navigation={this.props.navigation} />
       </SafeAreaView>
     );
   }
